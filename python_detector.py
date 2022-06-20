@@ -43,7 +43,7 @@ class Endoscope:
 
             for i in cords:
                 cv2.rectangle(frame, (i[0],i[1]), (i[2], i[3]), bgr, 1)
-            cv2.imshow('Prove of bbox', frame)
+            cv2.imshow('Proof of bbox', frame)
             cv2.waitKey(0)
             # Destroying present windows on screen
             cv2.destroyAllWindows()

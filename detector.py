@@ -8,10 +8,6 @@ from saved_models.models.yolo import Model
 
 
 class Endoscope:
-    """
-    Class implements Yolo5 model to make inferences on a youtube video using Opencv2.
-    """
-
     def __init__(self, capture_index, model_name, data='./dataset/cheetah_dataset.yaml'):
         """
         Initializes the class with youtube url and output file.
@@ -20,18 +16,16 @@ class Endoscope:
         """
         self.capture_index = capture_index
         self.model = self.load_model(model_name)
-        if data:  # data.yaml path (optional)
+        if data:
             with open(data, errors='ignore') as f:
-                self.classes = yaml.safe_load(f)['names']  # class names
+                self.classes = yaml.safe_load(f)['names']  # get the class name if yaml file is available
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         print("Using Device: ", self.device)
 
     def get_video_capture(self):
         """
-        Creates a new video streaming object to extract video frame by frame to make prediction on.
-        :return: opencv2 video capture object, with lowest quality frame available for video.
+        Video streaming
         """
-
         return cv2.VideoCapture(self.capture_index)
 
     def load_model(self, model_name):
